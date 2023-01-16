@@ -114,6 +114,17 @@ public class ChessMatch {
     return capturedPiece;
   }
 
+  private void undoMove(Position source, Position target, Piece capturedPiece) {
+    Piece p = board.removePiece(target);
+    board.placePiece(p, source);
+
+    if (capturedPiece != null) {
+      board.placePiece(capturedPiece, target);
+      capturedPieces.remove(capturedPiece);
+      piecesOnTheBoard.add(capturedPiece);
+    }
+  }
+
   private void initialSetup() {
     placeNewPiece('c', 1, new Rook(board, Color.WHITE));
     placeNewPiece('c', 2, new Rook(board, Color.WHITE));
