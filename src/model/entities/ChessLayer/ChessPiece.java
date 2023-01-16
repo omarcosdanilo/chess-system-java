@@ -4,7 +4,7 @@ import model.entities.BoardLayer.Board;
 import model.entities.BoardLayer.Piece;
 import model.entities.ChessLayer.enums.Color;
 
-public class ChessPiece extends Piece {
+public abstract class ChessPiece extends Piece {
   private Color color;
   private Integer moveCount;
 
