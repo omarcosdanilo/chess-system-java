@@ -30,6 +30,10 @@ public class ChessMatch {
     initialSetup();
   }
 
+  public boolean getCheck() {
+    return check;
+  }
+  
   public int getTurn() {
     return turn;
   }
@@ -60,9 +64,19 @@ public class ChessMatch {
   public ChessPiece performChessMove(ChessPosition sourcePosition, ChessPosition targetPosition) {
     Position source = sourcePosition.toPosition();
     Position target = targetPosition.toPosition();
+
     validateSourcePosition(source);
     validateTargetPosition(source, target);
+
     Piece capturedPiece = makeMove(source, target);
+
+    if (testCheck(currentPlayer)) {
+      undoMove(source, target, capturedPiece);
+      throw new ChessException("You can't put yourself in check");
+    };
+
+    check = (testCheck(opponent(currentPlayer))) ? true : false;
+
     nextTurn();
 
     return (ChessPiece) capturedPiece;
