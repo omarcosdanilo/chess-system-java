@@ -15,8 +15,8 @@ public class ChessMatch {
   private Board board;
   private Integer turn;
   private Color currentPlayer;
-  private List<ChessPiece> piecesOnTheBoard = new ArrayList<>();
-  private List<ChessPiece> capturedPieces = new ArrayList<>();
+  private List<Piece> piecesOnTheBoard = new ArrayList<>();
+  private List<Piece> capturedPieces = new ArrayList<>();
   private boolean check;
   private boolean checkMate;
   private ChessPiece enPassantVulnerable;
@@ -103,6 +103,11 @@ public class ChessMatch {
   private Piece makeMove(Position source, Position target) {
     Piece p = board.removePiece(source);
     Piece capturedPiece = board.removePiece(target);
+
+    if (capturedPiece != null) {
+      piecesOnTheBoard.remove(capturedPiece);
+      capturedPieces.add(capturedPiece);
+    }
 
     board.placePiece(p, target);
 
