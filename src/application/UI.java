@@ -3,6 +3,7 @@ package application;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import model.entities.ChessLayer.ChessMatch;
 import model.entities.ChessLayer.ChessPiece;
 import model.entities.ChessLayer.ChessPosition;
 import model.entities.ChessLayer.enums.Color;
@@ -69,6 +70,12 @@ public class UI {
     System.out.println("  a b c d e f g h");
   }
 
+  public static void printMatch(ChessMatch chessMatch) {
+    printBoard(chessMatch.getPieces());
+    System.out.println();
+    System.out.println("Turn: " + chessMatch.getTurn());
+    System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
+  }
   private static void printPiece(ChessPiece piece, boolean backgroud) {
     if  (backgroud) {
       System.out.print(ANSI_BLUE_BACKGROUND);
@@ -87,5 +94,5 @@ public class UI {
     System.out.print(" ");
   }
 
-
+ 
 }
