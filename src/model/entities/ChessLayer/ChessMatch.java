@@ -144,6 +144,23 @@ public class ChessMatch {
     throw new IllegalStateException("There is no " + color + " king on the board");
   }
 
+  private boolean testCheck(Color color) {
+    Position kingPosition = king(color).getChessPosition().toPosition();
+    List<Piece> opponentPieces = piecesOnTheBoard.stream()
+                                              .filter(x -> ((ChessPiece)x).getColor() == opponent(color))
+                                              .collect(Collectors.toList());
+
+    for (Piece piece : opponentPieces) {
+      boolean[][] mat = piece.possibleMoves();
+
+      if (mat[kingPosition.getRow()][kingPosition.getColumn()]) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   private void initialSetup() {
     placeNewPiece('c', 1, new Rook(board, Color.WHITE));
     placeNewPiece('c', 2, new Rook(board, Color.WHITE));
