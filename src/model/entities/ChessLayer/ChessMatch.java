@@ -19,7 +19,17 @@ public class ChessMatch {
 
   public ChessMatch() {
     board = new Board(8, 8);
+    turn = 1;
+    currentPlayer = Color.WHITE;
     initialSetup();
+  }
+
+  public int getTurn() {
+    return turn;
+  }
+
+  public Color getCurrentPlayer() {
+    return currentPlayer;
   }
 
   public ChessPiece[][] getPieces() {
