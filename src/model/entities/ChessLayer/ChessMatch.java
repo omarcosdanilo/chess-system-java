@@ -1,5 +1,8 @@
 package model.entities.ChessLayer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import model.entities.BoardLayer.Board;
 import model.entities.BoardLayer.Piece;
 import model.entities.BoardLayer.Position;
@@ -12,6 +15,8 @@ public class ChessMatch {
   private Board board;
   private Integer turn;
   private Color currentPlayer;
+  private List<ChessPiece> piecesOnTheBoard = new ArrayList<>();
+  private List<ChessPiece> capturedPieces = new ArrayList<>();
   private boolean check;
   private boolean checkMate;
   private ChessPiece enPassantVulnerable;
@@ -47,6 +52,8 @@ public class ChessMatch {
 
   private void placeNewPiece(char column, int row, ChessPiece piece) {
     board.placePiece(piece, new ChessPosition(column, row).toPosition());
+
+    piecesOnTheBoard.add(piece);
   }
 
   public ChessPiece performChessMove(ChessPosition sourcePosition, ChessPosition targetPosition) {
