@@ -125,6 +125,10 @@ public class ChessMatch {
     }
   }
 
+  private Color opponent(Color color) {
+    return (color == Color.WHITE) ? Color.BLACK : Color.WHITE;
+  }
+  
   private void initialSetup() {
     placeNewPiece('c', 1, new Rook(board, Color.WHITE));
     placeNewPiece('c', 2, new Rook(board, Color.WHITE));
