@@ -1,6 +1,6 @@
 package model.entities.BoardLayer;
 
-public class Piece {
+public abstract class Piece {
   protected Position position;
   private Board board;
 
@@ -13,4 +13,9 @@ public class Piece {
     return board;
   }
   
+  public abstract boolean[][] possibleMoves();
+
+  public boolean possibleMove(Position position) {
+    return possibleMoves()[position.getRow()][position.getColumn()];
+  }
 }
