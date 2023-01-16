@@ -55,6 +55,7 @@ public class ChessMatch {
     validateSourcePosition(source);
     validateTargetPosition(source, target);
     Piece capturedPiece = makeMove(source, target);
+    nextTurn();
 
     return (ChessPiece) capturedPiece;
   }
@@ -74,6 +75,12 @@ public class ChessMatch {
       throw new ChessException("The chosen piece can't move to the target position");
     };
   };
+
+  private void nextTurn() {
+    turn++;
+
+    currentPlayer = (currentPlayer == Color.WHITE) ? Color.BLACK : Color.WHITE;
+  }
 
   public boolean[][] possibleMoves(ChessPosition sourcePosition) {
     Position position = sourcePosition.toPosition();
