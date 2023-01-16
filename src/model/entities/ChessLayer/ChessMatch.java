@@ -2,6 +2,7 @@ package model.entities.ChessLayer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import model.entities.BoardLayer.Board;
 import model.entities.BoardLayer.Piece;
@@ -128,7 +129,21 @@ public class ChessMatch {
   private Color opponent(Color color) {
     return (color == Color.WHITE) ? Color.BLACK : Color.WHITE;
   }
-  
+
+  private ChessPiece king(Color color) {
+    List<Piece> list = piecesOnTheBoard.stream()
+                                        .filter(x -> ((ChessPiece)x).getColor() == color)
+                                        .collect(Collectors.toList());
+
+    for (Piece p : list) {
+      if (p instanceof King) {
+        return (ChessPiece) p;
+      }
+    }
+
+    throw new IllegalStateException("There is no " + color + " king on the board");
+  }
+
   private void initialSetup() {
     placeNewPiece('c', 1, new Rook(board, Color.WHITE));
     placeNewPiece('c', 2, new Rook(board, Color.WHITE));
