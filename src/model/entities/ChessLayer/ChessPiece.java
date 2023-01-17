@@ -8,7 +8,7 @@ import model.entities.ChessLayer.enums.Color;
 
 public abstract class ChessPiece extends Piece {
   private Color color;
-  private Integer moveCount;
+  private int moveCount;
 
   public ChessPiece(Board board, Color color) {
     super(board);
@@ -22,7 +22,7 @@ public abstract class ChessPiece extends Piece {
   public int getMoveCount() {
     return moveCount;
   }
-  
+
   protected boolean isThereOpponentPiece(Position position) {
     ChessPiece p = (ChessPiece) getBoard().piece(position);
 
